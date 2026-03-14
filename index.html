@@ -1,204 +1,223 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="UTF-8">
-<title>Happy Birthday Sister 💖</title>
+<title>Happy Birthday Akka 💗</title>
 
 <style>
 
 body{
 margin:0;
-font-family: 'Poppins', sans-serif;
-background: linear-gradient(135deg,#ffd6e7,#ffeef5);
-text-align:center;
-overflow-x:hidden;
+font-family:'Comic Sans MS', cursive;
+background:linear-gradient(135deg,#ffd6e7,#fff0f6);
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+overflow:hidden;
 }
 
-/* Floating Hearts */
+/* Card */
+
+.card{
+width:320px;
+height:420px;
+position:relative;
+perspective:1000px;
+}
+
+.card-inner{
+width:100%;
+height:100%;
+position:absolute;
+transform-style:preserve-3d;
+transition:1s;
+}
+
+.card.open .card-inner{
+transform:rotateY(180deg);
+}
+
+.front, .back{
+position:absolute;
+width:100%;
+height:100%;
+border-radius:20px;
+background:white;
+box-shadow:0 10px 25px rgba(0,0,0,0.2);
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+backface-visibility:hidden;
+padding:20px;
+}
+
+.front{
+background:#ffb6d5;
+color:white;
+font-size:26px;
+}
+
+.back{
+transform:rotateY(180deg);
+font-size:16px;
+text-align:center;
+}
+
+/* hearts */
 
 .heart{
 position:fixed;
-color:#ff4d88;
-animation: float 8s linear infinite;
 font-size:20px;
+animation:float 6s linear infinite;
 }
 
 @keyframes float{
-0%{transform:translateY(100vh); opacity:1;}
-100%{transform:translateY(-10vh); opacity:0;}
+0%{transform:translateY(100vh);opacity:1}
+100%{transform:translateY(-10vh);opacity:0}
 }
 
-/* Main card */
-
-.card{
-background:white;
-width:80%;
-max-width:600px;
-margin:80px auto;
-padding:40px;
-border-radius:25px;
-box-shadow:0 10px 30px rgba(0,0,0,0.1);
-}
-
-h1{
-color:#ff4d88;
-font-size:40px;
-}
-
-p{
-font-size:18px;
-color:#555;
-line-height:1.6;
-}
-
-/* buttons */
+/* button */
 
 button{
 background:#ff4d88;
 color:white;
 border:none;
-padding:12px 25px;
+padding:10px 20px;
 border-radius:20px;
-font-size:16px;
-margin:10px;
+margin-top:10px;
 cursor:pointer;
-transition:0.3s;
 }
 
 button:hover{
 background:#ff1a66;
-transform:scale(1.05);
 }
 
-/* game area */
+/* game */
 
 #game{
-margin-top:30px;
-height:250px;
-background:#fff0f6;
-border-radius:15px;
+margin-top:15px;
+width:100%;
+height:120px;
+background:#ffe3ef;
+border-radius:10px;
 position:relative;
 overflow:hidden;
 }
 
-.catchHeart{
+.catch{
 position:absolute;
-font-size:25px;
+font-size:24px;
 cursor:pointer;
 }
 
-.score{
-font-size:20px;
-color:#ff4d88;
-margin-top:10px;
-}
-
-.hidden{
-display:none;
-}
-
 </style>
+
 </head>
 
 <body>
 
-<div class="card">
+<div class="card" onclick="openCard()" id="card">
 
-<h1>Happy Birthday Sister 💖</h1>
+<div class="card-inner">
+
+<div class="front">
+💌 Tap to open<br>
+Happy Birthday<br>
+Akka 💗
+</div>
+
+<div class="back">
+
+<h2>Happy Birthday Akka 🎂</h2>
 
 <p>
-To the most wonderful sister in the world 💕<br><br>
+My sweet <b>Akka</b>, my cute <b>Bubu</b>, my lovely <b>Emi</b> 💗  
 
-You are not just my sister… you are my best friend,  
-my secret keeper, my supporter, and one of the most  
-important people in my life.  
+You are one of the most precious people in my life.  
+Your smile makes my days brighter and your love makes my world happier.
 
-Your smile makes every day brighter 🌸  
-Your kindness makes the world better 🌎  
-And your love makes our family stronger 💗  
+I am so lucky to have a wonderful Akka like you.  
+May your life always be filled with happiness, dreams and endless love.
 
-I am so lucky to have a sister like you.  
-May your life always be filled with happiness,  
-dreams, success and endless love.  
-
-Today is your special day 🎂  
-and you deserve all the hugs, joy, and sweetness in the world.
-
-Love you forever 💖
+Love you forever Bubu 💕  
+Happy Birthday Emi 🎂✨
 </p>
 
-<button onclick="showSurprise()">Click for Surprise 🎁</button>
-<button onclick="startGame()">Play Cute Game 🎮</button>
+<button onclick="startGame(event)">Play Heart Game 💖</button>
 
-<p id="surprise" class="hidden">
-You are the BEST sister ever! 💕  
-Never forget how loved you are 💗  
-Happy Birthday once again 🎂✨
-</p>
+<div id="game"></div>
 
-<div id="game" class="hidden"></div>
+<p id="score">Score: 0</p>
 
-<div class="score hidden" id="score">Score: 0</div>
+</div>
+
+</div>
 
 </div>
 
 <script>
 
-/* Floating hearts animation */
+/* card open */
+
+function openCard(){
+document.getElementById("card").classList.toggle("open")
+}
+
+/* floating hearts */
 
 function createHeart(){
-const heart=document.createElement("div")
-heart.classList.add("heart")
+
+let heart=document.createElement("div")
+
+heart.className="heart"
 heart.innerHTML="💗"
+
 heart.style.left=Math.random()*100+"vw"
 heart.style.fontSize=(Math.random()*20+10)+"px"
-heart.style.animationDuration=(Math.random()*5+5)+"s"
+heart.style.animationDuration=(Math.random()*3+3)+"s"
+
 document.body.appendChild(heart)
 
-setTimeout(()=>{
-heart.remove()
-},8000)
+setTimeout(()=>heart.remove(),6000)
+
 }
 
 setInterval(createHeart,400)
 
-/* surprise message */
-
-function showSurprise(){
-document.getElementById("surprise").classList.remove("hidden")
-}
-
-/* Cute game */
+/* game */
 
 let score=0
 
-function startGame(){
+function startGame(e){
 
-document.getElementById("game").classList.remove("hidden")
-document.getElementById("score").classList.remove("hidden")
+e.stopPropagation()
 
-const game=document.getElementById("game")
+let game=document.getElementById("game")
 
 setInterval(()=>{
 
-const heart=document.createElement("div")
-heart.classList.add("catchHeart")
-heart.innerHTML="💖"
+let h=document.createElement("div")
+h.className="catch"
+h.innerHTML="💖"
 
-heart.style.left=Math.random()*90+"%"
-heart.style.top=Math.random()*80+"%"
+h.style.left=Math.random()*90+"%"
+h.style.top=Math.random()*80+"%"
 
-heart.onclick=function(){
+h.onclick=function(){
+
 score++
 document.getElementById("score").innerText="Score: "+score
-heart.remove()
+h.remove()
+
 }
 
-game.appendChild(heart)
+game.appendChild(h)
 
-setTimeout(()=>heart.remove(),2000)
+setTimeout(()=>h.remove(),2000)
 
-},800)
+},700)
 
 }
 
