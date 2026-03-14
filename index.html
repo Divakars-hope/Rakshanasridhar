@@ -1,129 +1,59 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Happy Birthday Akka 💗</title>
+<title>Happy Birthday Rakshana Akka</title>
 
 <style>
 
 body{
-margin:0;
-font-family: 'Poppins', sans-serif;
 background:linear-gradient(135deg,#ffd6e7,#fff0f6);
-display:flex;
-justify-content:center;
-align-items:center;
-height:100vh;
-overflow:hidden;
+font-family:Arial;
+text-align:center;
+padding:40px;
 }
-
-/* CARD */
 
 .card{
-width:330px;
-height:440px;
-perspective:1000px;
-}
-
-.inner{
-position:relative;
-width:100%;
-height:100%;
-transition:1s;
-transform-style:preserve-3d;
-}
-
-.card.open .inner{
-transform:rotateY(180deg);
-}
-
-.front,.back{
-position:absolute;
-width:100%;
-height:100%;
-border-radius:20px;
 background:white;
-box-shadow:0 10px 30px rgba(0,0,0,0.2);
-display:flex;
-flex-direction:column;
-align-items:center;
-justify-content:center;
-padding:20px;
-backface-visibility:hidden;
-text-align:center;
+padding:30px;
+border-radius:20px;
+box-shadow:0 10px 25px rgba(0,0,0,0.2);
+max-width:400px;
+margin:auto;
 }
 
-.front{
-background:#ff9fc8;
-color:white;
-font-size:26px;
-}
-
-.back{
-transform:rotateY(180deg);
-}
-
-h2{
+h1{
 color:#ff4d88;
-margin-top:10px;
 }
-
-p{
-font-size:14px;
-color:#444;
-}
-
-/* BUTTON */
 
 button{
 background:#ff4d88;
-border:none;
 color:white;
-padding:10px 20px;
+border:none;
+padding:12px 20px;
 border-radius:20px;
 cursor:pointer;
-margin-top:10px;
 }
 
 button:hover{
 background:#ff1a66;
 }
 
-/* FLOATING HEARTS */
+#message{
+display:none;
+margin-top:20px;
+}
 
 .heart{
 position:fixed;
+bottom:-20px;
 font-size:20px;
 animation:float 6s linear infinite;
 }
 
 @keyframes float{
-0%{transform:translateY(100vh);opacity:1}
-100%{transform:translateY(-10vh);opacity:0}
-}
-
-/* GAME */
-
-#game{
-margin-top:10px;
-width:100%;
-height:120px;
-background:#ffe3ef;
-border-radius:10px;
-position:relative;
-overflow:hidden;
-}
-
-.catch{
-position:absolute;
-font-size:24px;
-cursor:pointer;
-}
-
-#score{
-color:#ff4d88;
-font-weight:bold;
+0%{transform:translateY(0)}
+100%{transform:translateY(-120vh)}
 }
 
 </style>
@@ -131,40 +61,39 @@ font-weight:bold;
 
 <body>
 
-<div class="card" id="card" onclick="openCard()">
+<div class="card">
 
-<div class="inner">
-
-<div class="front">
-💌 Tap to Open <br>
-Happy Birthday <br>
-Akka 💗
-</div>
-
-<div class="back">
-
-<h2>Happy Birthday Akka 🎂</h2>
+<h1>Happy Birthday Rakshana Akka 🎂💗</h1>
 
 <p>
-My sweet <b>Akka</b>, my cute <b>Bubu</b>, my lovely <b>Emi</b> 💖<br><br>
-
-You are one of the most special people in my life.  
-Your smile makes everything brighter and your love makes our family stronger.  
-
-I am lucky to have such an amazing Akka.  
-May your life always be full of happiness, dreams, and success.  
-
-Love you forever Bubu 💗  
-Happy Birthday Emi 🎉
+Tap below to open your birthday message 💌
 </p>
 
-<button onclick="startGame(event)">Play Heart Game 💖</button>
+<button onclick="showMessage()">Open Message</button>
 
-<div id="game"></div>
+<div id="message">
 
-<p id="score">Score: 0</p>
+<p>
+My dear <b>Rakshana Akka</b> 💖<br><br>
 
-</div>
+Nee enaku romba special Akka.  
+Even though we are not blood related,  
+you made me feel what a real sister is.
+
+Enaku unna romba pudikum Akka.  
+Nee en favourite <b>Bubu</b>.
+
+Sometimes you tell me everything like a true Akka  
+and that makes me very happy.
+
+Even a non-blood sister can become  
+someone very special in life –  
+you made me feel that.
+
+<b>Love forever Bubu 💕</b>
+
+Happy Birthday once again Akka 🎉
+</p>
 
 </div>
 
@@ -172,24 +101,17 @@ Happy Birthday Emi 🎉
 
 <script>
 
-/* CARD OPEN */
-
-function openCard(){
-document.getElementById("card").classList.toggle("open")
+function showMessage(){
+document.getElementById("message").style.display="block";
 }
-
-/* FLOATING HEARTS */
 
 function createHeart(){
 
 let heart=document.createElement("div")
-
 heart.className="heart"
 heart.innerHTML="💗"
 
 heart.style.left=Math.random()*100+"vw"
-heart.style.fontSize=(Math.random()*20+10)+"px"
-heart.style.animationDuration=(Math.random()*3+3)+"s"
 
 document.body.appendChild(heart)
 
@@ -197,69 +119,7 @@ setTimeout(()=>heart.remove(),6000)
 
 }
 
-setInterval(createHeart,400)
-
-/* CONFETTI */
-
-function confetti(){
-
-for(let i=0;i<20;i++){
-
-let c=document.createElement("div")
-c.innerHTML="🎉"
-
-c.style.position="fixed"
-c.style.left=Math.random()*100+"vw"
-c.style.top="-20px"
-c.style.fontSize="24px"
-
-c.style.animation="float 5s linear"
-
-document.body.appendChild(c)
-
-setTimeout(()=>c.remove(),5000)
-
-}
-
-}
-
-setTimeout(confetti,2000)
-
-/* GAME */
-
-let score=0
-
-function startGame(e){
-
-e.stopPropagation()
-
-let game=document.getElementById("game")
-
-setInterval(()=>{
-
-let h=document.createElement("div")
-
-h.className="catch"
-h.innerHTML="💖"
-
-h.style.left=Math.random()*90+"%"
-h.style.top=Math.random()*80+"%"
-
-h.onclick=function(){
-
-score++
-document.getElementById("score").innerText="Score: "+score
-h.remove()
-
-}
-
-game.appendChild(h)
-
-setTimeout(()=>h.remove(),2000)
-
-},700)
-
-}
+setInterval(createHeart,500)
 
 </script>
 
