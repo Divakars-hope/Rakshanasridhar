@@ -1,14 +1,15 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Happy Birthday Akka 💗</title>
 
 <style>
 
 body{
 margin:0;
-font-family:'Comic Sans MS', cursive;
+font-family: 'Poppins', sans-serif;
 background:linear-gradient(135deg,#ffd6e7,#fff0f6);
 display:flex;
 justify-content:center;
@@ -17,55 +18,79 @@ height:100vh;
 overflow:hidden;
 }
 
-/* Card */
+/* CARD */
 
 .card{
-width:320px;
-height:420px;
-position:relative;
+width:330px;
+height:440px;
 perspective:1000px;
 }
 
-.card-inner{
+.inner{
+position:relative;
 width:100%;
 height:100%;
-position:absolute;
-transform-style:preserve-3d;
 transition:1s;
+transform-style:preserve-3d;
 }
 
-.card.open .card-inner{
+.card.open .inner{
 transform:rotateY(180deg);
 }
 
-.front, .back{
+.front,.back{
 position:absolute;
 width:100%;
 height:100%;
 border-radius:20px;
 background:white;
-box-shadow:0 10px 25px rgba(0,0,0,0.2);
+box-shadow:0 10px 30px rgba(0,0,0,0.2);
 display:flex;
 flex-direction:column;
-justify-content:center;
 align-items:center;
-backface-visibility:hidden;
+justify-content:center;
 padding:20px;
+backface-visibility:hidden;
+text-align:center;
 }
 
 .front{
-background:#ffb6d5;
+background:#ff9fc8;
 color:white;
 font-size:26px;
 }
 
 .back{
 transform:rotateY(180deg);
-font-size:16px;
-text-align:center;
 }
 
-/* hearts */
+h2{
+color:#ff4d88;
+margin-top:10px;
+}
+
+p{
+font-size:14px;
+color:#444;
+}
+
+/* BUTTON */
+
+button{
+background:#ff4d88;
+border:none;
+color:white;
+padding:10px 20px;
+border-radius:20px;
+cursor:pointer;
+margin-top:10px;
+}
+
+button:hover{
+background:#ff1a66;
+}
+
+/* FLOATING HEARTS */
 
 .heart{
 position:fixed;
@@ -78,26 +103,10 @@ animation:float 6s linear infinite;
 100%{transform:translateY(-10vh);opacity:0}
 }
 
-/* button */
-
-button{
-background:#ff4d88;
-color:white;
-border:none;
-padding:10px 20px;
-border-radius:20px;
-margin-top:10px;
-cursor:pointer;
-}
-
-button:hover{
-background:#ff1a66;
-}
-
-/* game */
+/* GAME */
 
 #game{
-margin-top:15px;
+margin-top:10px;
 width:100%;
 height:120px;
 background:#ffe3ef;
@@ -112,19 +121,23 @@ font-size:24px;
 cursor:pointer;
 }
 
-</style>
+#score{
+color:#ff4d88;
+font-weight:bold;
+}
 
+</style>
 </head>
 
 <body>
 
-<div class="card" onclick="openCard()" id="card">
+<div class="card" id="card" onclick="openCard()">
 
-<div class="card-inner">
+<div class="inner">
 
 <div class="front">
-💌 Tap to open<br>
-Happy Birthday<br>
+💌 Tap to Open <br>
+Happy Birthday <br>
 Akka 💗
 </div>
 
@@ -133,16 +146,16 @@ Akka 💗
 <h2>Happy Birthday Akka 🎂</h2>
 
 <p>
-My sweet <b>Akka</b>, my cute <b>Bubu</b>, my lovely <b>Emi</b> 💗  
+My sweet <b>Akka</b>, my cute <b>Bubu</b>, my lovely <b>Emi</b> 💖<br><br>
 
-You are one of the most precious people in my life.  
-Your smile makes my days brighter and your love makes my world happier.
+You are one of the most special people in my life.  
+Your smile makes everything brighter and your love makes our family stronger.  
 
-I am so lucky to have a wonderful Akka like you.  
-May your life always be filled with happiness, dreams and endless love.
+I am lucky to have such an amazing Akka.  
+May your life always be full of happiness, dreams, and success.  
 
-Love you forever Bubu 💕  
-Happy Birthday Emi 🎂✨
+Love you forever Bubu 💗  
+Happy Birthday Emi 🎉
 </p>
 
 <button onclick="startGame(event)">Play Heart Game 💖</button>
@@ -159,13 +172,13 @@ Happy Birthday Emi 🎂✨
 
 <script>
 
-/* card open */
+/* CARD OPEN */
 
 function openCard(){
 document.getElementById("card").classList.toggle("open")
 }
 
-/* floating hearts */
+/* FLOATING HEARTS */
 
 function createHeart(){
 
@@ -186,7 +199,33 @@ setTimeout(()=>heart.remove(),6000)
 
 setInterval(createHeart,400)
 
-/* game */
+/* CONFETTI */
+
+function confetti(){
+
+for(let i=0;i<20;i++){
+
+let c=document.createElement("div")
+c.innerHTML="🎉"
+
+c.style.position="fixed"
+c.style.left=Math.random()*100+"vw"
+c.style.top="-20px"
+c.style.fontSize="24px"
+
+c.style.animation="float 5s linear"
+
+document.body.appendChild(c)
+
+setTimeout(()=>c.remove(),5000)
+
+}
+
+}
+
+setTimeout(confetti,2000)
+
+/* GAME */
 
 let score=0
 
@@ -199,6 +238,7 @@ let game=document.getElementById("game")
 setInterval(()=>{
 
 let h=document.createElement("div")
+
 h.className="catch"
 h.innerHTML="💖"
 
