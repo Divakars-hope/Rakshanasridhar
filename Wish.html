@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Happy Birthday Sister 💖</title>
+
+<style>
+
+body{
+margin:0;
+font-family: 'Poppins', sans-serif;
+background: linear-gradient(135deg,#ffd6e7,#ffeef5);
+text-align:center;
+overflow-x:hidden;
+}
+
+/* Floating Hearts */
+
+.heart{
+position:fixed;
+color:#ff4d88;
+animation: float 8s linear infinite;
+font-size:20px;
+}
+
+@keyframes float{
+0%{transform:translateY(100vh); opacity:1;}
+100%{transform:translateY(-10vh); opacity:0;}
+}
+
+/* Main card */
+
+.card{
+background:white;
+width:80%;
+max-width:600px;
+margin:80px auto;
+padding:40px;
+border-radius:25px;
+box-shadow:0 10px 30px rgba(0,0,0,0.1);
+}
+
+h1{
+color:#ff4d88;
+font-size:40px;
+}
+
+p{
+font-size:18px;
+color:#555;
+line-height:1.6;
+}
+
+/* buttons */
+
+button{
+background:#ff4d88;
+color:white;
+border:none;
+padding:12px 25px;
+border-radius:20px;
+font-size:16px;
+margin:10px;
+cursor:pointer;
+transition:0.3s;
+}
+
+button:hover{
+background:#ff1a66;
+transform:scale(1.05);
+}
+
+/* game area */
+
+#game{
+margin-top:30px;
+height:250px;
+background:#fff0f6;
+border-radius:15px;
+position:relative;
+overflow:hidden;
+}
+
+.catchHeart{
+position:absolute;
+font-size:25px;
+cursor:pointer;
+}
+
+.score{
+font-size:20px;
+color:#ff4d88;
+margin-top:10px;
+}
+
+.hidden{
+display:none;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+<h1>Happy Birthday Sister 💖</h1>
+
+<p>
+To the most wonderful sister in the world 💕<br><br>
+
+You are not just my sister… you are my best friend,  
+my secret keeper, my supporter, and one of the most  
+important people in my life.  
+
+Your smile makes every day brighter 🌸  
+Your kindness makes the world better 🌎  
+And your love makes our family stronger 💗  
+
+I am so lucky to have a sister like you.  
+May your life always be filled with happiness,  
+dreams, success and endless love.  
+
+Today is your special day 🎂  
+and you deserve all the hugs, joy, and sweetness in the world.
+
+Love you forever 💖
+</p>
+
+<button onclick="showSurprise()">Click for Surprise 🎁</button>
+<button onclick="startGame()">Play Cute Game 🎮</button>
+
+<p id="surprise" class="hidden">
+You are the BEST sister ever! 💕  
+Never forget how loved you are 💗  
+Happy Birthday once again 🎂✨
+</p>
+
+<div id="game" class="hidden"></div>
+
+<div class="score hidden" id="score">Score: 0</div>
+
+</div>
+
+<script>
+
+/* Floating hearts animation */
+
+function createHeart(){
+const heart=document.createElement("div")
+heart.classList.add("heart")
+heart.innerHTML="💗"
+heart.style.left=Math.random()*100+"vw"
+heart.style.fontSize=(Math.random()*20+10)+"px"
+heart.style.animationDuration=(Math.random()*5+5)+"s"
+document.body.appendChild(heart)
+
+setTimeout(()=>{
+heart.remove()
+},8000)
+}
+
+setInterval(createHeart,400)
+
+/* surprise message */
+
+function showSurprise(){
+document.getElementById("surprise").classList.remove("hidden")
+}
+
+/* Cute game */
+
+let score=0
+
+function startGame(){
+
+document.getElementById("game").classList.remove("hidden")
+document.getElementById("score").classList.remove("hidden")
+
+const game=document.getElementById("game")
+
+setInterval(()=>{
+
+const heart=document.createElement("div")
+heart.classList.add("catchHeart")
+heart.innerHTML="💖"
+
+heart.style.left=Math.random()*90+"%"
+heart.style.top=Math.random()*80+"%"
+
+heart.onclick=function(){
+score++
+document.getElementById("score").innerText="Score: "+score
+heart.remove()
+}
+
+game.appendChild(heart)
+
+setTimeout(()=>heart.remove(),2000)
+
+},800)
+
+}
+
+</script>
+
+</body>
+</html>
